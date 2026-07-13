@@ -990,20 +990,35 @@ function setupFeedback() {
   const form = document.querySelector("#feedbackForm");
   if (!form) return;
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
-    const rating = formData.get("rating") || "5";
-    const message = String(formData.get("message") || "").trim();
-    const body = [
-      `网站评分：${rating}/5`,
-      "",
-      "留言：",
-      message || "暂无留言"
-    ].join("\n");
-    const mailto = `mailto:puwanru@gmail.com?subject=${encodeURIComponent("个人网站反馈")}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    showToast("已生成反馈邮件，正在打开邮件应用");
+    formData.set("rating", formData.get("rating") || "5");
+    formData.set("message", String(formData.get("message") || "").trim());
+
+    submitButton.disabled = true;
+    submitButton.textContent = "正在提交…";
+    form.setAttribute("aria-busy", "true");
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" }
+      });
+
+      if (!response.ok) throw new Error("Feedback submission failed");
+
+      form.reset();
+      showToast("提交成功！");
+    } catch {
+      showToast("提交失败，请稍后重试");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "提交反馈";
+      form.removeAttribute("aria-busy");
+    }
   });
 }
 
