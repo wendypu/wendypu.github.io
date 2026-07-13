@@ -1011,7 +1011,7 @@ function setupFeedback() {
       if (!response.ok) throw new Error("Feedback submission failed");
 
       form.reset();
-      showToast("提交成功！");
+      showToast("提交成功！", { dialog: true });
     } catch {
       showToast("提交失败，请稍后重试");
     } finally {
@@ -1022,11 +1022,15 @@ function setupFeedback() {
   });
 }
 
-function showToast(message) {
+function showToast(message, { dialog = false } = {}) {
   toast.textContent = message;
+  toast.classList.toggle("is-dialog", dialog);
   toast.classList.add("is-visible");
   window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 1800);
+  showToast.timer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    window.setTimeout(() => toast.classList.remove("is-dialog"), 200);
+  }, 1800);
 }
 
 renderWorkExperiences();
