@@ -2324,13 +2324,6 @@ h3 {
   cursor: wait;
 }
 
-.feedback-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
 .not-found-page {
   min-height: 100vh;
 }
@@ -2531,6 +2524,31 @@ h3 {
 .toast.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.toast.is-dialog {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  z-index: 2000;
+  width: min(340px, calc(100vw - 40px));
+  transform: translate(-50%, -46%) scale(0.96);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 94%, var(--washi));
+  color: var(--ink);
+  box-shadow: 0 24px 70px rgba(60, 39, 30, 0.22);
+  padding: 28px 32px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(14px);
+}
+
+.toast.is-visible.is-dialog {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 @media (max-width: 920px) {
