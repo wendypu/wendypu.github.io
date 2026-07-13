@@ -794,6 +794,7 @@ function setupGameCards() {
 
     gameDialogContent.innerHTML = gameCardMarkup(game, index, true);
     gameDialog.showModal();
+    gameDialog.focus({ preventScroll: true });
   });
 
   closeButton?.addEventListener("click", () => gameDialog.close());
