@@ -22,7 +22,7 @@
     <meta name="twitter:description" content="7年日语专业背景与日本留学经历，聚焦日语本地化、内容运营、用户研究与视觉表达。">
     <meta name="twitter:image" content="assets/social-preview.png">
     <link rel="icon" href="assets/site-icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=87">
+    <link rel="stylesheet" href="styles.css?v=88">
   </head>
   <body>
     <header class="site-header" data-elevated="false">
@@ -332,7 +332,8 @@
           <h2 id="feedbackTitle">评分与留言</h2>
           <p class="feedback-intro">欢迎留下你对这个网站的评分和建议</p>
         </div>
-        <form class="feedback-form" id="feedbackForm">
+        <form class="feedback-form" id="feedbackForm" action="https://formspree.io/f/xojgqnqo" method="post">
+          <input type="hidden" name="_subject" value="个人网站反馈">
           <fieldset class="rating-field">
             <legend>网站评分</legend>
             <div class="rating-options" aria-label="网站评分，满分 5 分">
@@ -350,9 +351,10 @@
           </fieldset>
           <label class="message-field">
             <span>留言</span>
-            <textarea name="message" rows="4" placeholder="写下你的建议或想对我说的话"></textarea>
+            <textarea name="message" rows="4" maxlength="1000" placeholder="写下你的建议或想对我说的话" required></textarea>
           </label>
           <button class="solid-button" type="submit">提交反馈</button>
+          <p class="feedback-note">提交后，网站评分和文字反馈将直接发送给我。</p>
         </form>
       </section>
     </main>
@@ -373,6 +375,6 @@
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="script.js?v=34"></script>
+    <script src="script.js?v=35"></script>
   </body>
 </html>
